@@ -2,12 +2,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class calculator {
 
@@ -49,10 +54,26 @@ public class calculator {
 	 */
 	private void initialize() {
 		frmCalculator = new JFrame();
+		frmCalculator.setAlwaysOnTop(true);
+		frmCalculator.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DELL\\Desktop\\caclipic.png"));
 		frmCalculator.setBackground(Color.LIGHT_GRAY);
-		frmCalculator.setTitle("CALCULATOR");
+		frmCalculator.setTitle("                                          CALCULATOR");
 		frmCalculator.setBounds(100, 100, 439, 470);
-		frmCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//SHOW WARNING MSG WHILE CLOSING THE GUI
+		frmCalculator.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmCalculator.addWindowListener((WindowListener) new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+				int choose =JOptionPane.showConfirmDialog(null,
+						"Do you really want to exit the application?",
+						"Coinfrm close", JOptionPane.YES_NO_OPTION,
+						JOptionPane.INFORMATION_MESSAGE);
+				if (choose == JOptionPane.YES_OPTION) {
+					e.getWindow().dispose();
+				}
+			}
+		});
+	//	frmCalculator.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		frmCalculator.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
